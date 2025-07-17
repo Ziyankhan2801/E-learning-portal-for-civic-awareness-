@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Civic Learning Portal</title>
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-tertiary: #808080;
+            --accent-blue: #4a90e2;
+            --accent-green: #50c878;
+            --accent-orange: #ff8c42;
+            --accent-purple: #8b5cf6;
+            --accent-red: #ef4444;
+            --border-primary: #333333;
+            --hover-bg: #353535;
+            --accent-bg: #2a2a2a;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+       
+       
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-blue);
+            background: var(--hover-bg);
+        }
+
+        .page-hero {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            padding: 3rem 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .page-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .page-hero p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .resources-container {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .resource-section {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid var(--border-primary);
+        }
+
+        .resource-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .resource-card:hover {
+            background: var(--hover-bg);
+            transform: translateY(-2px);
+        }
+
+        .resource-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .resource-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .resource-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+            margin-bottom: 1rem;
+        }
+
+        .resource-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--accent-bg);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            border: 1px solid var(--border-primary);
+        }
+
+        .tag.law { background: var(--accent-blue); color: white; }
+        .tag.rights { background: var(--accent-green); color: white; }
+        .tag.government { background: var(--accent-orange); color: white; }
+        .tag.forms { background: var(--accent-purple); color: white; }
+        .tag.emergency { background: var(--accent-red); color: white; }
+
+        .sidebar {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 6rem;
+        }
+
+        .sidebar h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .sidebar li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .sidebar a:hover {
+            color: var(--accent-blue);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-box::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .filter-section {
+            margin-bottom: 2rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .filter-btn {
+            background: var(--accent-bg);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.8rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .download-section {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .download-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 6px;
+            padding: 1rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .download-item:hover {
+            background: var(--hover-bg);
+        }
+
+        .download-btn {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 0.5rem;
+        }
+
+        .download-btn:hover {
+            background: #3a7bc8;
+        }
+
+        .emergency-contacts {
+            background: var(--accent-red);
+            color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .emergency-contacts h3 {
+            margin-bottom: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-number {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-primary);
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-primary);
+            color: var(--text-tertiary);
+        }
+
+        @media (max-width: 768px) {
+            .resources-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .filter-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+     <header>
+        <div class="container">
+            <h1>🏛️ CIVIC LEARNING PORTAL</h1>
+            <nav>
+        <a href="home.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="resources.html">Resources</a>
+        <a href="community.html">Community</a>
+        <a href="profile.html">👤</a>
+        <a href="signup.html">Signup</a>
+        <a href="login.html">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>📚 Civic Resources Hub</h1>
+            <p>Access essential documents, forms, guides, and tools to navigate your civic responsibilities and rights effectively.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="resources-container">
+            <div class="main-content">
+                <section class="resource-section">
+                    <h2>📋 Official Documents & Forms</h2>
+                    <div class="resource-grid">
+                        <div class="resource-card">
+                            <h3>RTI Application Form</h3>
+                            <p>Standard format for filing Right to Information requests with government departments.</p>
+                            <div class="resource-meta">
+                                <span>📄 PDF</span>
+                                <span>📊 2 Pages</span>
+                                <span>⬇️ 15.2k downloads</span>
+                            </div>
+                            <div class="resource-tags">
+                                <span class="tag rights">RTI</span>
+                                <span class="tag forms">Form</span>
+                            </div>
+                        </div>
+                        <div class="resource-card">
+                            <h3>Voter Registration Form</h3>
+                            <p>Complete your voter registration with this official Election Commission form.</p>
+                            <div class="resource-meta">
+                                <span>📄 PDF</span>
+                                <span>📊 4 Pages</span>
+                                <span>⬇️ 28.7k downloads</span>
+                            </div>
+                            <div class="resource-tags">
+                                <span class="tag government">Election</span>
+                                <span class="tag forms">Form</span>
+                            </div>
+                        </div>
+                        <div class="resource-card">
+                            <h3>Grievance Redressal Form</h3>
+                            <p>File complaints and grievances against government services and departments.</p>
+                            <div class="resource-meta">
+                                <span>📄 PDF</span>
+                                <span>📊 3 Pages</span>
+                                <span>⬇️ 8.9k downloads</span>
+                            </div>
+                            <div class="resource-tags">
+                                <span class="tag government">Grievance</span>
+                                <span class="tag forms">Form</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="resource-section">
+                    <h2>⚖️ Legal Resources</h2>
+                    <div class="resource-grid">
+                        <div class="resource-card">
+                            <h3>Indian Constitution (Simplified)</h3>
+                            <p>Easy-to-understand version of the Indian Constitution with key articles explained.</p>
+                            <div class="resource-meta">
+                                <span>📄 PDF</span>
+                                <span>📊 156 Pages</span>
+                                <span>⬇️ 45.3k downloads</span>
+                            </div>
+                            <div class="resource-tags">
+                                <span class="tag law">Constitution</span>
+                                <span class="tag rights">Rights</span>
+                            </div>
+                        </div>
+                        <div class="resource-card">
+                            <h3>Fundamental Rights Guide</h3>
+                            <p>Comprehensive guide to your fundamental rights as an Indian citizen.</p>
+                            <div class="resource-meta">
+                                <span>📄 PDF</span>
+                                <span>📊 24 Pages</span>
+                                <span>⬇️ 32.1k downloads</span>
+                            </div>
+                            <div class="resource-tags">
+                                <span class="tag rights">Rights</span>
+                                <span class="tag law">Legal</span>
+                            </div>
+                        </div>
+                        <div class="resource-card">
+                            <h3>Consumer Protection Laws</h3>
+                            <p>Know your rights as a consumer and how to protect yourself from unfair practices.</p>
+                            <div class="resource-meta">
+                                <span>📄 PDF</span>
+                                <span>📊 18 Pages</span>
+                                <span>⬇️ 12.7k downloads</span>
+                            </div>
+                            <div class="resource-tags">
+                                <span class="tag law">Consumer</span>
+                                <span class="tag rights">Protection</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="resource-section">
+                    <h2>📖 Quick Reference Guides</h2>
+                    <div class="resource-grid">
+                        <div class="resource-card">
+                            <h3>Government Schemes Directory</h3>
+                            <p>Complete list of central and state government schemes with eligibility criteria.</p>
+                            <div class="resource-meta">
+                                <span>📄 PDF</span>
+                                <span>📊 89 Pages</span>
+                                <span>⬇️ 67.8k downloads</span>
+                            </div>
+                            <div class="resource-tags">
+                                <span class="tag government">Schemes</span>
+                                <span class="tag forms">Directory</span>
+                            </div>
+                        </div>
+                        <div class="resource-card">
+                            <h3>Local Government Structure</h3>
+                            <p>Understanding Panchayati Raj, Municipal Corporations, and local governance.</p>
+                            <div class="resource-meta">
+                                <span>📄 PDF</span>
+                                <span>📊 32 Pages</span>
+                                <span>⬇️ 19.4k downloads</span>
+                            </div>
+                            <div class="resource-tags">
+                                <span class="tag government">Local</span>
+                                <span class="tag law">Governance</span>
+                            </div>
+                        </div>
+                        <div class="resource-card">
+                            <h3>Digital India Services</h3>
+                            <p>Complete guide to online government services and digital platforms.</p>
+                            <div class="resource-meta">
+                                <span>📄 PDF</span>
+                                <span>📊 26 Pages</span>
+                                <span>⬇️ 21.6k downloads</span>
+                            </div>
+                            <div class="resource-tags">
+                                <span class="tag government">Digital</span>
+                                <span class="tag forms">Services</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="resource-section">
+                    <h2>🚨 Emergency Resources</h2>
+                    <div class="emergency-contacts">
+                        <h3>⚡ Emergency Contacts</h3>
+                        <div class="contact-item">
+                            <span>Police Emergency</span>
+                            <span class="contact-number">100</span>
+                        </div>
+                        <div class="contact-item">
+                            <span>Fire Emergency</span>
+                            <span class="contact-number">101</span>
+                        </div>
+                        <div class="contact-item">
+                            <span>Medical Emergency</span>
+                            <span class="contact-number">108</span>
+                        </div>
+                        <div class="contact-item">
+                            <span>Women Helpline</span>
+                            <span class="contact-number">181</span>
+                        </div>
+                        <div class="contact-item">
+                            <span>Child Helpline</span>
+                            <span class="contact-number">1098</span>
+                        </div>
+                    </div>
+                </section>
+                <section class="resource-section">
+                    <h2>⬇️ Popular Downloads</h2>
+                    <div class="download-section">
+                        <div class="download-grid">
+                            <div class="download-item">
+                                <h4>📋 RTI Toolkit</h4>
+                                <p>Complete RTI filing guide with templates</p>
+                                <button class="download-btn">Download ZIP</button>
+                            </div>
+                            <div class="download-item">
+                                <h4>🗳️ Voter's Guide</h4>
+                                <p>Everything about voting and elections</p>
+                                <button class="download-btn">Download PDF</button>
+                            </div>
+                            <div class="download-item">
+                                <h4>⚖️ Legal Aid Directory</h4>
+                                <p>Free legal aid contacts and resources</p>
+                                <button class="download-btn">Download PDF</button>
+                            </div>
+                            <div class="download-item">
+                                <h4>🏛️ Government Directory</h4>
+                                <p>Complete government offices contact list</p>
+                                <button class="download-btn">Download Excel</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="sidebar">
+                <input type="text" class="search-box" placeholder="Search resources...">
+                
+                <div class="filter-section">
+                    <h3>🔍 Filter by Category</h3>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active">All</button>
+                        <button class="filter-btn">Forms</button>
+                        <button class="filter-btn">Legal</button>
+                        <button class="filter-btn">Government</button>
+                        <button class="filter-btn">Rights</button>
+                    </div>
+                </div>
+
+                <h3>🔗 Quick Links</h3>
+                <ul>
+                    <li><a href="#">RTI Online Portal</a></li>
+                    <li><a href="#">Voter Registration</a></li>
+                    <li><a href="#">Government Schemes</a></li>
+                    <li><a href="#">Legal Aid Services</a></li>
+                    <li><a href="#">Consumer Forum</a></li>
+                    <li><a href="#">Digital India Portal</a></li>
+                    <li><a href="#">MyGov Platform</a></li>
+                    <li><a href="#">Grievance Portal</a></li>
+                </ul>
+
+                <h3>📊 Most Downloaded</h3>
+                <ul>
+                    <li><a href="#">Constitution Guide</a></li>
+                    <li><a href="#">Voter Registration Form</a></li>
+                    <li><a href="#">RTI Application</a></li>
+                    <li><a href="#">Government Schemes</a></li>
+                    <li><a href="#">Legal Rights Guide</a></li>
+                </ul>
+
+                <h3>🆕 Recently Added</h3>
+                <ul>
+                    <li><a href="#">Digital Rights Guide</a></li>
+                    <li><a href="#">Environmental Laws</a></li>
+                    <li><a href="#">Public Transport Rules</a></li>
+                    <li><a href="#">Workplace Rights</a></li>
+                </ul>
+            </aside>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="#">RTI Portal</a> | <a href="#">Lokpal Act</a> | <a href="#">Constitution</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Government Resources</h4>
+                    <p><a href="#">India.gov.in</a> | <a href="#">MyGov</a> | <a href="#">Digital India</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <p><a href="#">Help Center</a> | <a href="#">Contact Us</a> | <a href="#">Privacy Policy</a></p>
+                </div>
+            </div>
+            <p class="footer-bottom">&copy; 2025 Civic Learning Portal | Empowering Citizens Through Education</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.textContent.toLowerCase();
+                const cards = document.querySelectorAll('.resource-card');
+                
+                cards.forEach(card => {
+                    if (filter === 'all') {
+                        card.style.display = 'block';
+                    } else {
+                        const tags = card.querySelectorAll('.tag');
+                        let hasTag = false;
+                        tags.forEach(tag => {
+                            if (tag.textContent.toLowerCase().includes(filter)) {
+                                hasTag = true;
+                            }
+                        });
+                        card.style.display = hasTag ? 'block' : 'none';
+                    }
+                });
+            });
+        });
+
+        document.querySelector('.search-box').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const cards = document.querySelectorAll('.resource-card');
+            
+            cards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const item = this.closest('.download-item');
+                const title = item.querySelector('h4').textContent;
+                alert(`Downloading: ${title}`);
+            });
+        });
+    </script>
+</body>
+</html>
